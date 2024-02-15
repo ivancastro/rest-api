@@ -1,0 +1,31 @@
+### Recuperar películas
+GET http://localhost:3000/movies
+
+### Recuperar películas por ID
+GET http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+### Recuperar todas las películas por genero
+GET http://localhost:3000/movies?genre=ACTION
+
+### Crear una película
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "2 Fast 2 Furious",
+  "year": 2003,
+  "director": "John Daniel Singleton",
+  "duration": 147,
+  "poster": "https://m.media-amazon.com/images/I/51MQ5ZMAPYL._AC_UF894,1000_QL80_.jpg",
+  "genre": ["Action", "Drama"],
+  "rate": 5.9
+}
+
+### Actualizar una película
+PATCH http://localhost:3000/movies/6a360a18-c645-4b47-9a7b-2a71babbf3e0
+Content-Type: application/json
+
+{
+  "title": "Avatar 3",
+  "year": 1995
+}
