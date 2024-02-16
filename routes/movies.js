@@ -1,12 +1,18 @@
 import { Router } from 'express'
 import { MovieController } from '../controllers/MovieController.js'
 
-const router = Router()
+const createMovieRoute = ({ movieModel }) => {
+  const router = Router()
 
-router.get('/', MovieController.getAll)
-router.get('/:id', MovieController.getById)
-router.post('/', MovieController.create)
-router.patch('/:id', MovieController.update)
-router.delete('/:id', MovieController.delete)
+  const movieController = new MovieController({ movieModel: movieModel })
 
-export default router
+  router.get('/', movieController.getAll)
+  router.get('/:id', movieController.getById)
+  router.post('/', movieController.create)
+  router.patch('/:id', movieController.update)
+  router.delete('/:id', movieController.delete)
+
+  return router
+}
+
+export { createMovieRoute }

@@ -2,10 +2,10 @@
 GET http://localhost:3000/movies
 
 ### Recuperar películas por ID
-GET http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+GET http://localhost:3000/movies/4f862ae8-ccfe-11ee-83dc-9408534262e4
 
 ### Recuperar todas las películas por genero
-GET http://localhost:3000/movies?genre=ACTION
+GET http://localhost:3000/movies?genre=drama
 
 ### Crear una película
 POST http://localhost:3000/movies
@@ -29,3 +29,7 @@ Content-Type: application/json
   "title": "Avatar 4",
   "year": 1998
 }
+
+### Eliminar una película
+DELETE http://localhost:3000/movies/fdcb6bde-cd19-11ee-ba36-3a00de6baddb
+Content-Type: application/json

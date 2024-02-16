@@ -5,7 +5,10 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch app.js",
+    "dev:mysql": "node --watch server-mysql.js",
+    "dev:local": "node --watch server-local.js",
+    "start:mysql": "node --watch server-mysql.js",
+    "start:local": "node --watch server-local.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
@@ -13,7 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "cors": "2.8.5",
+    "dotenv": "^16.4.4",
     "express": "4.18.2",
+    "mysql2": "^3.9.1",
     "zod": "3.22.4"
   }
 }

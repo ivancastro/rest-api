@@ -1,18 +1,21 @@
-import { MovieModel } from '../models/movie.js'
 import { validateMovie, validatePartialMovie } from '../schemas/movies.js'
 
 export class MovieController {
-  static async getAll(req, res) {
+  constructor({ movieModel }) {
+    this.movieModel = movieModel
+  }
+
+  getAll = async (req, res) => {
     const { genre } = req.query
-    const movies = await MovieModel.getAll({ genre });
+    const movies = await this.movieModel.getAll({ genre });
   
     res.json(movies) 
   }
 
-  static async getById(req, res) {
+  getById = async (req, res) => {
     try {
       const { id } = req.params;
-      const movie = await MovieModel.getById({ id })
+      const movie = await this.movieModel.getById({ id })
   
       if(movie != null)
         return res.json(movie)
@@ -23,14 +26,14 @@ export class MovieController {
     }
   }
 
-  static async create(req, res) {
+  create = async (req, res) => {
     try {
       const result = validateMovie(req.body)
   
       if(result.error)
         return res.status(400).json({error: JSON.parse(result.error.message)})
   
-      const newMovie = await MovieModel.create({ input: result.data })
+      const newMovie = await this.movieModel.create({ input: result.data })
   
       res.status(201).json(newMovie)
     } catch (error) {
@@ -38,14 +41,14 @@ export class MovieController {
     }
   }
 
-  static async update(req, res) {
+  update = async (req, res) => {
     try {
       const { id } = req.params
       const resultValidation = validatePartialMovie(req.body);
   
       if(resultValidation.error) return res.status(400).json({error: JSON.parse(resultValidation.error.message)})
   
-      const result = await MovieModel.update({id, input: resultValidation.data})
+      const result = await this.movieModel.update({id, input: resultValidation.data})
   
       if(!result.success) return res.status(404).json({ message: result.message })
   
@@ -55,10 +58,10 @@ export class MovieController {
     }
   }
 
-  static async delete(req, res) {
+  delete = async (req, res) => {
     try {
       const { id } = req.params
-      const movieDeleted = await MovieModel.delete({ id })
+      const movieDeleted = await this.movieModel.delete({ id })
   
       if(!movieDeleted) return res.status(404).json({message: 'Movie not found.'})
   
